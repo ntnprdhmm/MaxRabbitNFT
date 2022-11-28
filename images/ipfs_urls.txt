@@ -1,1 +1,2 @@
 https://ipfs.io/ipfs/QmX2nmEzUuJQwYVov3vMYMfTybUJfdNt2dXWaZfzE2hgh5?filename=nft_image_1.jpg
+https://ipfs.io/ipfs/QmdH94FLSjqYrtNfJ5rcdqQJE7SWhSiJNS9D9aaqnkBcSN?filename=ntf_image_1_metadata.json

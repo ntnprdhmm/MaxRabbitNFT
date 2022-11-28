@@ -1,0 +1,16 @@
+{
+  "description": "Max loves to eat books and magazines. Here is a picture of baby Max on a pile of magazines.",
+  "external_url": "localhost:3000",
+  "image": "https://ipfs.io/ipfs/QmX2nmEzUuJQwYVov3vMYMfTybUJfdNt2dXWaZfzE2hgh5?filename=nft_image_1.jpg",
+  "name": "Baby Max eating magazines",
+  "attributes": [
+    {
+      "trait_type": "Animal",
+      "value": "Rabbit"
+    },
+    {
+      "trait_type": "WhatDoing",
+      "value": "EatingMagazines"
+    }
+  ]
+}

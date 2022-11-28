@@ -1,38 +1,38 @@
-.App {
-  text-align: center;
+.title {
+  color: var(--green-2);
+  font-size: 48px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.subtitle {
+  color: var(--white-color);
+  font-size: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.button {
+  text-decoration: none;
+  background-color: var(--green-2);
+  color: var(--white-color);
+  font-family: "Minecraft", sans-serif;
+  padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#button-metamask {
+  position: absolute;
+  top: 32px;
+  right: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+.mint-form-container {
+    color: var(--white-color);
+    padding-top: 32px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mint-form {
+    padding-top: 12px;
+}
+.mint-form label {
+    padding-right: 6px;
+}
+.mint-form input {
+    width: 370px;
 }
