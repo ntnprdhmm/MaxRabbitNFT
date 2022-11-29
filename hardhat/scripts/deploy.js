@@ -1,9 +1,10 @@
 const hre = require("hardhat");
+require("dotenv").config();
 
 async function main() {
   const maxRabbitFactory = await hre.ethers.getContractFactory("MaxRabbit");
   const contractOwner = await hre.ethers.getSigner(
-    "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"
+    process.env.REACT_APP_OWNER_ADDRESS
   );
   const maxRabbit = await maxRabbitFactory.connect(contractOwner).deploy();
 

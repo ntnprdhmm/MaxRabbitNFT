@@ -1,0 +1,16 @@
+{
+  "description": "Dreaming about food I'm sure.",
+  "external_url": "localhost:3000",
+  "image": "https://ipfs.io/ipfs/QmcEAUVdrxKcHsvWnPv9mayUd1HivjNtUy72TKjnrUNY8D?filename=nft_image_3.jpg",
+  "name": "Max sleeping",
+  "attributes": [
+    {
+      "trait_type": "Animal",
+      "value": "Rabbit"
+    },
+    {
+      "trait_type": "WhatDoing",
+      "value": "Sleeping"
+    }
+  ]
+}

@@ -22,5 +22,5 @@
   },
   "exclude": ["build", "node_modules", "cache"],
   "include": ["./src", "hardhat"],
-  "files": ["./hardhat.config.js"]
+  "files": ["./hardhat.config.js", "./.env"]
 }

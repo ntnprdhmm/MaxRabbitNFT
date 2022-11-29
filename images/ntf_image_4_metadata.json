@@ -1,0 +1,16 @@
+{
+  "description": "I was eating a banana, so he wanted a bite of course ...",
+  "external_url": "localhost:3000",
+  "image": "https://ipfs.io/ipfs/QmaJm5sJPbj29wFbFyMXr4zS2HAxhQG1JAQspjBhY5wDVD?filename=nft_image_4.jpg",
+  "name": "Max wants banana",
+  "attributes": [
+    {
+      "trait_type": "Animal",
+      "value": "Rabbit"
+    },
+    {
+      "trait_type": "WhatDoing",
+      "value": "WantsBanana"
+    }
+  ]
+}

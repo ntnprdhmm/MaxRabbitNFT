@@ -1,0 +1,16 @@
+{
+  "description": "No, he was not in jail I'm kidding.",
+  "external_url": "localhost:3000",
+  "image": "https://ipfs.io/ipfs/QmQ7EYxtJz58Xmc2f1rYFTrtr5pBXkAjFpwQtSfiPFG6KM?filename=nft_image_2.png",
+  "name": "Max in Jail",
+  "attributes": [
+    {
+      "trait_type": "Animal",
+      "value": "Rabbit"
+    },
+    {
+      "trait_type": "WhatDoing",
+      "value": "InJail"
+    }
+  ]
+}

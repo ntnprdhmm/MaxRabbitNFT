@@ -4,29 +4,37 @@ import MaxRabbitArtifact from "./MaxRabbit.json";
 
 import "./App.css";
 
-const maxContractAddress = "0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f";
-const ownerAddress = "0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199";
+type Metadata = {
+  description: string;
+  external_url: string;
+  image: string;
+  name: string;
+  attributes: {
+    trait_type: string;
+    value: string;
+  }[];
+};
 
 function App() {
   const [address, setAddress] = useState<string>();
-  const [maxRabbitContract, setMaxRabbitContract] = useState<ethers.Contract>();
+  const [allTokensFetchInitiated, setAllTokensFetchInitiated] =
+    useState<boolean>(false);
+  const [allMetadata, setAllMetadata] = useState<Metadata[]>([]);
 
-  if (typeof window.ethereum !== "undefined") {
-    console.log("MetaMask is installed!");
+  if (typeof window.ethereum === "undefined") {
+    console.log("MetaMask must be installed!");
   }
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const maxRabbitContract = new ethers.Contract(
+    process.env.REACT_APP_MAX_CONTRACT_ADDRESS!,
+    MaxRabbitArtifact.abi,
+    provider.getSigner()
+  );
 
   const loginMetamask = async () => {
     const addresses = await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
     setAddress(addresses[0]);
-
-    setMaxRabbitContract(new ethers.Contract(
-      maxContractAddress,
-      MaxRabbitArtifact.abi,
-      signer
-    ));
   };
 
   const handleMintSubmit = async (event: any) => {
@@ -35,27 +43,43 @@ function App() {
     const uri = data.get("uri");
 
     if (uri && maxRabbitContract) {
-      await maxRabbitContract.safeMint(ownerAddress, uri);
+      await maxRabbitContract.safeMint(
+        process.env.REACT_APP_OWNER_ADDRESS,
+        uri
+      );
     }
   };
 
   const getAllTokens = async () => {
-    if (maxRabbitContract) {
-      const totalSupply = await maxRabbitContract.totalSupply();
-      const count = parseInt(totalSupply._hex, 16);
+    const totalSupply = await maxRabbitContract.totalSupply();
+    const count = parseInt(totalSupply._hex, 16);
 
-      for (let i = 0; i < count; i++) {
-        const token = await maxRabbitContract.tokenByIndex(i);
-        const tokenId = parseInt(token._hex, 16);
-        const tokenURI = await maxRabbitContract.tokenURI(tokenId);
-        console.log("tokenURI", tokenURI);
-      }
+    const metadataURIs: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const token = await maxRabbitContract.tokenByIndex(i);
+      const tokenId = parseInt(token._hex, 16);
+      const tokenURI = await maxRabbitContract.tokenURI(tokenId);
+      metadataURIs.push(tokenURI);
     }
+
+    const allMetadata = await Promise.all(
+      metadataURIs.map(async (uri) => {
+        const response = await fetch(uri);
+        const metadata = await response.json();
+        return metadata;
+      })
+    );
+
+    setAllMetadata(allMetadata);
   };
 
-  const isOwner = address === ownerAddress;
+  const isOwner =
+    address !== undefined && address === process.env.REACT_APP_OWNER_ADDRESS;
 
-  getAllTokens();
+  if (maxRabbitContract && !allTokensFetchInitiated) {
+    setAllTokensFetchInitiated(true);
+    getAllTokens();
+  }
 
   return (
     <div className="App">
@@ -78,6 +102,19 @@ function App() {
           </form>
         </div>
       )}
+
+      <div className="all-nft-container">
+        {allMetadata.map((metadata) => (
+          <div className="nft-container">
+            <img
+              className="nft-image"
+              src={metadata.image}
+              alt={metadata.name}
+            />
+            <div className="nft-title">{metadata.name}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
