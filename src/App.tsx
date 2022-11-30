@@ -15,11 +15,19 @@ type Metadata = {
   }[];
 };
 
+type TokenWithMetadata = {
+  id: number;
+  uri: string;
+  ownerId: string;
+} & Metadata;
+
 function App() {
   const [address, setAddress] = useState<string>();
   const [allTokensFetchInitiated, setAllTokensFetchInitiated] =
     useState<boolean>(false);
-  const [allMetadata, setAllMetadata] = useState<Metadata[]>([]);
+  const [tokensWithMetadata, setTokensWithMetadata] = useState<
+    TokenWithMetadata[]
+  >([]);
 
   if (typeof window.ethereum === "undefined") {
     console.log("MetaMask must be installed!");
@@ -54,23 +62,31 @@ function App() {
     const totalSupply = await maxRabbitContract.totalSupply();
     const count = parseInt(totalSupply._hex, 16);
 
-    const metadataURIs: string[] = [];
+    const uriById = new Map<number, string>();
     for (let i = 0; i < count; i++) {
       const token = await maxRabbitContract.tokenByIndex(i);
       const tokenId = parseInt(token._hex, 16);
-      const tokenURI = await maxRabbitContract.tokenURI(tokenId);
-      metadataURIs.push(tokenURI);
+      const tokenURI: string = await maxRabbitContract.tokenURI(tokenId);
+      uriById.set(tokenId, tokenURI);
     }
 
-    const allMetadata = await Promise.all(
-      metadataURIs.map(async (uri) => {
+    const _tokensWithMetadata: TokenWithMetadata[] = await Promise.all(
+      Array.from(uriById.entries()).map(async ([id, uri]) => {
         const response = await fetch(uri);
-        const metadata = await response.json();
-        return metadata;
+        const metadata: Metadata = await response.json();
+
+        const owner = await maxRabbitContract.ownerOf(id);
+
+        return {
+          ...metadata,
+          id,
+          uri,
+          ownerId: owner,
+        };
       })
     );
 
-    setAllMetadata(allMetadata);
+    setTokensWithMetadata(_tokensWithMetadata);
   };
 
   const isOwner =
@@ -80,6 +96,8 @@ function App() {
     setAllTokensFetchInitiated(true);
     getAllTokens();
   }
+
+  console.log("refresh");
 
   return (
     <div className="App">
@@ -104,14 +122,10 @@ function App() {
       )}
 
       <div className="all-nft-container">
-        {allMetadata.map((metadata) => (
+        {tokensWithMetadata.map((token) => (
           <div className="nft-container">
-            <img
-              className="nft-image"
-              src={metadata.image}
-              alt={metadata.name}
-            />
-            <div className="nft-title">{metadata.name}</div>
+            <img className="nft-image" src={token.image} alt={token.name} />
+            <div className="nft-title">{token.name}</div>
           </div>
         ))}
       </div>
