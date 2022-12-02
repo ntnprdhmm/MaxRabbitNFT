@@ -1,9 +1,10 @@
 import React from "react";
 import TokensListItem from "./TokensListItem";
 import MintForm from "./MintForm";
+import { Token } from "./tokens";
 
 type TokensListProps = {
-  tokens: any[];
+  tokens: Token[];
   mint: (uri: string) => void;
   isContractOwner: boolean;
   handleClickOnToken: (id: number) => void;

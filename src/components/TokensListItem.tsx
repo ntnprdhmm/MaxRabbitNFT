@@ -1,9 +1,10 @@
 import React from "react";
+import { Token } from "./tokens";
 
 import "./TokensListItem.css";
 
 type TokensListItemProps = {
-  token: any;
+  token: Token;
   onTokenClick: (id: number) => void;
 };
 

@@ -1,9 +1,10 @@
 import React from "react";
+import { Token } from "./tokens";
 
 import "./TokenDetails.css";
 
 type TokenDetailsProps = {
-  token: any;
+  token: Token;
   onClickReturn: () => void;
 };
 
