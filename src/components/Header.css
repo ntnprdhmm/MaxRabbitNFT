@@ -1,0 +1,15 @@
+.title {
+  color: var(--green-2);
+  font-size: 48px;
+}
+
+.subtitle {
+  color: var(--white-color);
+  font-size: 24px;
+}
+
+#button-metamask {
+  position: absolute;
+  top: 32px;
+  right: 16px;
+}

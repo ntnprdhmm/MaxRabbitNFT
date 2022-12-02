@@ -1,0 +1,18 @@
+.nft-container {
+  width: 300px;
+  text-align: center;
+  margin-top: 32px;
+  border: 1px solid var(--white-color);
+  padding: 24px;
+  display: inline-block;
+  margin-right: 24px;
+}
+
+.nft-image {
+  width: 300px;
+}
+
+.nft-title {
+  padding-top: 12px;
+  color: var(--green-2);
+}
