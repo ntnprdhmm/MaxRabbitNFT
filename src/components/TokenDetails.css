@@ -1,7 +1,48 @@
-.container {
+.token-details-container {
+  padding-top: 32px;
   display: flex;
 }
 
 .column {
   flex: 50%;
+}
+
+.token-details-image {
+  width: 400px;
+}
+
+.token-details-buttons .button:first-child {
+  margin-right: 24px;
+}
+
+.token-details-name {
+  color: var(--green-2);
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.token-details-description {
+  color: var(--white-color);
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.token-details-owner {
+  color: var(--white-color);
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.token-details-attributes {
+  padding-bottom: 12px;
+}
+
+.token-details-attribute {
+  color: var(--white-color);
+  margin-bottom: 12px;
+}
+
+.token-details-attribute span {
+  color: var(--green-2);
 }

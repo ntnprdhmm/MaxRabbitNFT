@@ -29,7 +29,7 @@ type TokensContainerProps = {
 function TokensContainer(props: TokensContainerProps) {
   const { address } = props;
 
-  // const [selectedTokenId, setSelectedTokenId] = useState<number>();
+  const [selectedTokenId, setSelectedTokenId] = useState<number>();
   const [tokensWithMetadata, setTokensWithMetadata] = useState<
     TokenWithMetadata[]
   >([]);
@@ -68,7 +68,7 @@ function TokensContainer(props: TokensContainerProps) {
         };
       })
     );
-    console.log(_tokensWithMetadata);
+
     setTokensWithMetadata(_tokensWithMetadata);
   };
 
@@ -82,20 +82,19 @@ function TokensContainer(props: TokensContainerProps) {
     getAllTokens();
   }, []);
 
-  /*
-  if (selectedTokenId) {
+  if (selectedTokenId !== undefined) {
     const token = tokensWithMetadata.find(
       (token) => token.id === selectedTokenId
     );
-    return <TokenDetails token={token} />;
+    return <TokenDetails token={token} onClickReturn={() => setSelectedTokenId(undefined)} />;
   }
-  */
 
   return (
     <TokensList
       tokens={tokensWithMetadata}
       isContractOwner={isContractOwner}
       mint={handleMint}
+      handleClickOnToken={setSelectedTokenId}
     />
   );
 }

@@ -27,7 +27,11 @@ function Header(props: HeaderProps) {
         <h1 className="title">MaxRabbit</h1>
       </div>
       <div className="subtitle">NFTs of the cuttest rabbit on earth.</div>
-      <button className="button" id="button-metamask" onClick={loginMetamask}>
+      <button
+        className="button button-green"
+        id="button-metamask"
+        onClick={loginMetamask}
+      >
         Login with Metamask
       </button>
     </div>
