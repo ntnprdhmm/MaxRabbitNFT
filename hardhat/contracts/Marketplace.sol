@@ -57,7 +57,7 @@ contract Marketplace {
     ) external payable onlyTokenOwner(tokenId) {
         require(price > 0, "Selling price must be at least 1 wei");
         require(
-            msg.value == listingPrice,
+            msg.value >= listingPrice,
             string.concat(
                 "Wrong listing price, must be ",
                 Strings.toString(listingPrice)
