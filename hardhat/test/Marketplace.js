@@ -24,9 +24,10 @@ describe("Marketplace", () => {
       return { marketplace, maxRabbit, tokenId };
     }
 
-    describe("listTokenInMarketplace", () => {
-      const price = hre.ethers.utils.parseEther("0.32");
+    const price = hre.ethers.utils.parseEther("0.32");
+    const priceZero = hre.ethers.utils.parseEther("0");
 
+    describe("listTokenInMarketplace", () => {
       describe("When the token price is 0", () => {
         it("Throws because the price must be at least 1 wei", async () => {
           const { marketplace, maxRabbit, tokenId } = await listTokenSetup();
@@ -34,7 +35,6 @@ describe("Marketplace", () => {
           await maxRabbit.approve(marketplace.address, tokenId);
 
           const options = { value: hre.ethers.utils.parseEther("0.0025") };
-          const priceZero = hre.ethers.utils.parseEther("0");
 
           await expect(
             marketplace.listTokenInMarketplace(tokenId, priceZero, options)
@@ -97,6 +97,30 @@ describe("Marketplace", () => {
           ).to.be.revertedWith(
             "This token is already listed in the marketplace"
           );
+        });
+      });
+    });
+
+    describe("unlist", () => {
+      describe("When the token is listed", () => {
+        it("Removes the token from the list", async () => {
+          const { marketplace, maxRabbit, tokenId } = await listTokenSetup();
+
+          await maxRabbit.approve(marketplace.address, tokenId);
+
+          const options = { value: hre.ethers.utils.parseEther("0.0025") };
+          await marketplace.listTokenInMarketplace(tokenId, price, options);
+          const listedPriceBeforeUnlist = await marketplace.priceByTokenId(
+            tokenId
+          );
+          expect(listedPriceBeforeUnlist).to.be.equal(price);
+
+          await marketplace.unlist(tokenId);
+
+          const listedPriceAfterUnlist = await marketplace.priceByTokenId(
+            tokenId
+          );
+          expect(listedPriceAfterUnlist).to.be.equal(priceZero);
         });
       });
     });
