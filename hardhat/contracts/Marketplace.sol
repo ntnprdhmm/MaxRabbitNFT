@@ -39,14 +39,18 @@ contract Marketplace {
 
     function buyToken(uint16 tokenId, address buyer) external payable {
         require(
+            priceByTokenId[tokenId] > 0,
+            "The token you try to buy is not listed"
+        );
+        require(
             msg.value >= priceByTokenId[tokenId],
             "The amount sent is lower than the token price"
         );
 
-        // send money ?
-        maxRabbit.safeTransferFrom(address(this), buyer, tokenId);
-        address owner = maxRabbit.ownerOf(tokenId);
-        payable(owner).transfer(msg.value);
+        address seller = maxRabbit.ownerOf(tokenId);
+        maxRabbit.safeTransferFrom(seller, buyer, tokenId);
+
+        payable(seller).transfer(msg.value);
 
         _unlist(tokenId);
     }

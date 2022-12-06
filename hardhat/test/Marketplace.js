@@ -4,7 +4,7 @@ const hre = require("hardhat");
 describe("Marketplace", () => {
   describe("listTokenInMarketplace", async () => {
     async function listTokenSetup() {
-      const [owner] = await hre.ethers.getSigners();
+      const [owner, buyer] = await hre.ethers.getSigners();
 
       const maxRabbitFactory = await hre.ethers.getContractFactory("MaxRabbit");
       const maxRabbit = await maxRabbitFactory.deploy();
@@ -21,7 +21,7 @@ describe("Marketplace", () => {
         0
       );
 
-      return { marketplace, maxRabbit, tokenId };
+      return { marketplace, maxRabbit, tokenId, buyer, owner };
     }
 
     const price = hre.ethers.utils.parseEther("0.32");
@@ -121,6 +121,82 @@ describe("Marketplace", () => {
             tokenId
           );
           expect(listedPriceAfterUnlist).to.be.equal(priceZero);
+        });
+      });
+    });
+
+    describe("buyToken", () => {
+      describe("When the token is not listed", () => {
+        it("Throws", async () => {
+          const { marketplace, tokenId, buyer } = await listTokenSetup();
+
+          await expect(
+            marketplace.buyToken(tokenId, buyer.address)
+          ).to.be.revertedWith("The token you try to buy is not listed");
+        });
+      });
+
+      describe("When the token is listed", () => {
+        describe("When the ether sent is less than the price", () => {
+          it("Throws", async () => {
+            const { marketplace, maxRabbit, tokenId, buyer } =
+              await listTokenSetup();
+
+            await maxRabbit.approve(marketplace.address, tokenId);
+
+            const listOptions = {
+              value: hre.ethers.utils.parseEther("0.0025"),
+            };
+            await marketplace.listTokenInMarketplace(
+              tokenId,
+              price,
+              listOptions
+            );
+
+            const buyerPrice = hre.ethers.utils.parseEther("0.20");
+            const buyOptions = { value: buyerPrice };
+
+            await expect(
+              marketplace.buyToken(tokenId, buyer.address, buyOptions)
+            ).to.be.revertedWith(
+              "The amount sent is lower than the token price"
+            );
+          });
+        });
+
+        describe("When the ether sent is the seller price", () => {
+          it("Transfers the token to the buyer and the ether to the seller, and removes the token from the marketplace listing", async () => {
+            const { marketplace, maxRabbit, tokenId, buyer, owner } =
+              await listTokenSetup();
+
+            await maxRabbit
+              .connect(owner)
+              .approve(marketplace.address, tokenId);
+
+            const listOptions = {
+              value: hre.ethers.utils.parseEther("0.0025"),
+            };
+            await marketplace
+              .connect(owner)
+              .listTokenInMarketplace(tokenId, price, listOptions);
+
+            const buyOptions = { value: price };
+            await marketplace
+              .connect(buyer)
+              .buyToken(tokenId, buyer.address, buyOptions);
+
+            const newOwner = await maxRabbit.ownerOf(tokenId);
+
+            expect(newOwner).to.be.equal(buyer.address);
+
+            const buyerBalance = await buyer.getBalance();
+            const sellerBalance = await owner.getBalance();
+            expect(buyerBalance).to.be.equal("9999679914380607624519"); // - token price - gas
+            expect(sellerBalance).to.be.equal("10000256993674289749009"); // - list price - gas + token price
+
+            const listedPrice = await marketplace.priceByTokenId(tokenId);
+            expect(listedPrice).to.be.equal(0);
+          });
         });
       });
     });
