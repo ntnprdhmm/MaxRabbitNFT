@@ -5,6 +5,7 @@ import { Token, Metadata } from "./tokens";
 
 import { ethers } from "ethers";
 import MaxRabbitArtifact from "../MaxRabbit.json";
+import MarketplaceArtifact from "../Marketplace.json";
 
 type TokensContainerProps = {
   address: string | undefined;
@@ -22,6 +23,15 @@ function TokensContainer(props: TokensContainerProps) {
     MaxRabbitArtifact.abi,
     provider.getSigner()
   );
+  const marketplaceContract = new ethers.Contract(
+    process.env.REACT_APP_MARKETPLACE_CONTRACT_ADDRESS!,
+    MarketplaceArtifact.abi,
+    provider.getSigner()
+  );
+
+  const getTokensOnSale = async () => {
+    // const x = marketplaceContract.;
+  };
 
   const getAllTokens = async () => {
     const totalSupplyHex = await maxRabbitContract.totalSupply();
