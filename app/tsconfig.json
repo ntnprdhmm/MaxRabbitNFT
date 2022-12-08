@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "exclude": ["build", "node_modules", "cache"],
-  "include": ["./src", "hardhat", "test", "scripts", "./typechain-types"],
-  "files": ["hardhat.config.ts", "./.env", "./src/react-app-env.d.ts"]
+  "exclude": ["build", "node_modules"],
+  "include": ["./src"],
+  "files": ["../.env", "./src/react-app-env.d.ts"]
 }
