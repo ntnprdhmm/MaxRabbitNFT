@@ -1,6 +1,7 @@
 {
-  "name": "hardhat",
+  "name": "@max-rabbit-nft/hardhat",
   "version": "0.1.0",
+  "private": true,
   "scripts": {
     "start": "npx -p hardhat hardhat node",
     "deploy": "npx -p hardhat hardhat run --network localhost scripts/deploy.js",

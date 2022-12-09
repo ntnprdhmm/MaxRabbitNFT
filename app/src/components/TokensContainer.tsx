@@ -4,8 +4,12 @@ import TokenDetails from "./TokenDetails";
 import { Token, Metadata } from "./tokens";
 
 import { ethers } from "ethers";
-import MaxRabbitArtifact from "../MaxRabbit.json";
-import MarketplaceArtifact from "../Marketplace.json";
+
+// local copy of typechain-types (from /hardhat) because it's not possible to import from hardhat package
+import {
+  Marketplace__factory,
+  MaxRabbit__factory,
+} from "../typechain-types/factories/contracts";
 
 type TokensContainerProps = {
   address: string | undefined;
@@ -18,18 +22,16 @@ function TokensContainer(props: TokensContainerProps) {
   const [tokensWithMetadata, setTokensWithMetadata] = useState<Token[]>([]);
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const maxRabbitContract = new ethers.Contract(
+  const maxRabbitContract = MaxRabbit__factory.connect(
     process.env.REACT_APP_MAX_CONTRACT_ADDRESS!,
-    MaxRabbitArtifact.abi,
     provider.getSigner()
   );
-  const marketplaceContract = new ethers.Contract(
+  const marketplaceContract = Marketplace__factory.connect(
     process.env.REACT_APP_MARKETPLACE_CONTRACT_ADDRESS!,
-    MarketplaceArtifact.abi,
     provider.getSigner()
   );
 
-  const getTokensOnSale = async () => {
+  const getTokensOnSale = async () => {
     // const x = marketplaceContract.;
   };
 
@@ -65,7 +67,7 @@ function TokensContainer(props: TokensContainerProps) {
   };
 
   const handleMint = async (uri: string): Promise<void> => {
-    await maxRabbitContract.safeMint(process.env.REACT_APP_OWNER_ADDRESS, uri);
+    await maxRabbitContract.safeMint(process.env.REACT_APP_OWNER_ADDRESS!, uri);
   };
 
   const isContractOwner = address === process.env.REACT_APP_OWNER_ADDRESS;
