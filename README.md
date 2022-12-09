@@ -1,6 +1,13 @@
 # MaxRabbitNFT
 
-WebApp + contract on ethereum blockchain, to buy ERC 721 tokens of my rabbit Max, just for fun.
+ERC 721 tokens of my rabbit Max, just for fun
+
+- WebApp
+- Marketplace contract
+- ERC 721 contract
+
+![Alt text](./screenshot_1.png?raw=true "Home page")
+![Alt text](./screenshot_2.png?raw=true "NFT Details page")
 
 ## Requirements
 
