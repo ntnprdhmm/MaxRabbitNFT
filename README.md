@@ -2,9 +2,15 @@
 
 ERC 721 tokens of my rabbit Max, just for fun
 
-- WebApp
-- Marketplace contract
-- ERC 721 contract
+- a WebApp, in React
+- Smart contracts on Ethereum Blockchain: ERC 721 token, and marketplace to trade the tokens
+
+The owner of the contracts can mint new tokens.
+Tokens are displayed on the web app.
+The owner of a token can list the token on the marketplace and specify a price.
+The owner can unlist the listed token from the marketplace.
+The marketplace takes fees when someone list a token.
+Anyone can buy a listed token.
 
 ![Alt text](./screenshot_1.png?raw=true "Home page")
 ![Alt text](./screenshot_2.png?raw=true "NFT Details page")
