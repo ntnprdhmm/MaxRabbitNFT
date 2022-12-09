@@ -19,6 +19,12 @@ function TokensListItem(props: TokensListItemProps) {
     <div className="nft-container" onClick={handleClick}>
       <img className="nft-image" src={token.image} alt={token.name} />
       <div className="nft-title">{token.name}</div>
+      {token.price !== "0.0" && (
+        <div className="nft-on-sale">ON SALE {token.price} ETH</div>
+      )}
+      {token.price === "0.0" && (
+        <div className="nft-not-on-sale">NOT ON SALE</div>
+      )}
     </div>
   );
 }

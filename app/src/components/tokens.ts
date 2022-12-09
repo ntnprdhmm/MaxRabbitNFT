@@ -13,4 +13,5 @@ export type Token = {
   id: number;
   uri: string;
   ownerId: string;
+  price: string;
 } & Metadata;

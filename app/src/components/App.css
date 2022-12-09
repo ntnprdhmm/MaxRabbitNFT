@@ -9,6 +9,11 @@
   color: var(--white-color);
 }
 
+.button-red {
+  background-color: red;
+  color: var(--white-color);
+}
+
 .button-white {
   background-color: var(--white-color);
   color: var(--green-2);

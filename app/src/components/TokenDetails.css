@@ -11,10 +11,6 @@
   width: 400px;
 }
 
-.token-details-buttons .button:first-child {
-  margin-right: 24px;
-}
-
 .token-details-name {
   color: var(--green-2);
   font-size: 40px;
@@ -45,4 +41,15 @@
 
 .token-details-attribute span {
   color: var(--green-2);
+}
+
+.form-list-marketplace,
+.form-buy,
+.form-unlist-marketplace {
+  margin-top: 16px;
+}
+
+.form-list-marketplace input {
+  line-height: 32px;
+  padding: 0px;
 }

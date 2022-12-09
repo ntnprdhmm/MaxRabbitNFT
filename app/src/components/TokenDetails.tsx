@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Token } from "./tokens";
 
 import "./TokenDetails.css";
@@ -6,10 +6,26 @@ import "./TokenDetails.css";
 type TokenDetailsProps = {
   token: Token;
   onClickReturn: () => void;
+  unlist: () => void;
+  buy: () => void;
+  listOnMarketplace: (price: number) => void;
+  isOwner: boolean;
 };
 
 function TokenDetails(props: TokenDetailsProps) {
-  const { onClickReturn, token } = props;
+  const { onClickReturn, token, isOwner, listOnMarketplace, unlist, buy } =
+    props;
+  const [price, setPrice] = useState<number>(0);
+
+  const handlePriceChange = (e: any) => {
+    setPrice(e.target.value);
+  };
+
+  const handleClickListMarketplace = (e: any) => {
+    listOnMarketplace(price);
+  };
+
+  const isOnMarketplace = !!(token.price !== "0.0");
 
   return (
     <div className="token-details-container">
@@ -33,14 +49,41 @@ function TokenDetails(props: TokenDetailsProps) {
             ))}
           </div>
         )}
-        <div className="token-details-buttons">
+        <div>
           <button className="button button-white" onClick={onClickReturn}>
             Back to list
           </button>
-          <button className="button button-green" onClick={onClickReturn}>
-            Buy
-          </button>
         </div>
+        {isOwner && !isOnMarketplace && (
+          <div className="form-list-marketplace">
+            <button
+              className="button button-green"
+              onClick={handleClickListMarketplace}
+            >
+              List on Marketplace
+            </button>
+            <input
+              type="text"
+              placeholder="Price in ETH"
+              onChange={handlePriceChange}
+              value={price}
+            />
+          </div>
+        )}
+        {!isOwner && isOnMarketplace && (
+          <div className="form-buy">
+            <button className="button button-green" onClick={buy}>
+              Buy {token.price} ETH
+            </button>
+          </div>
+        )}
+        {isOwner && isOnMarketplace && (
+          <div className="form-unlist-marketplace">
+            <button className="button button-red" onClick={unlist}>
+              Remove from marketplace
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

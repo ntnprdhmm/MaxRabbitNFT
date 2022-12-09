@@ -16,3 +16,13 @@
   padding-top: 12px;
   color: var(--green-2);
 }
+
+.nft-on-sale {
+  margin-top: 16px;
+  color: var(--white-color);
+}
+
+.nft-not-on-sale {
+  margin-top: 16px;
+  color: red;
+}
