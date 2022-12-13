@@ -36,54 +36,70 @@ function TokenDetails(props: TokenDetailsProps) {
           alt={token.name}
         />
       </div>
-      <div className="column">
-        <div className="token-details-name">{token.name}</div>
-        <div className="token-details-description">{token.description}</div>
-        <div className="token-details-owner">Owned by {token.ownerId}</div>
-        {token.attributes.length && (
-          <div className="token-details-attributes">
-            {token.attributes.map(({ trait_type, value }: any, i: number) => (
-              <div className="token-details-attribute" key={i}>
-                <span>{trait_type}</span> {value}
+      <div className="column column-details">
+        <a id="backLink" href="javascript:void(0);" onClick={onClickReturn}>
+          Back to list
+        </a>
+        <div className="token-id">MaxRabbit #{token.id}</div>
+        <div className="token-description-container">
+          <div className="token-description-title">Description</div>
+          <div className="token-description">
+            <div className="token-description-name">{token.name}</div>
+            <div className="token-description-description">
+              {token.description}
+            </div>
+          </div>
+          <div className="token-description-owner-title">Owned By</div>
+          <div className="token-description-owner-id">{token.ownerId}</div>
+          {token.attributes.length && (
+            <>
+              <div className="token-description-attributes-title">
+                Properties
               </div>
-            ))}
-          </div>
-        )}
-        <div>
-          <button className="button button-white" onClick={onClickReturn}>
-            Back to list
-          </button>
+              <div className="token-description-attributes">
+                {token.attributes.map(
+                  ({ trait_type, value }: any, i: number) => (
+                    <div className="token-description-attribute" key={i}>
+                      <span>{trait_type}</span> {value}
+                    </div>
+                  )
+                )}
+              </div>
+            </>
+          )}
         </div>
-        {isOwner && !isOnMarketplace && (
-          <div className="form-list-marketplace">
-            <button
-              className="button button-green"
-              onClick={handleClickListMarketplace}
-            >
-              List on Marketplace
-            </button>
-            <input
-              type="text"
-              placeholder="Price in ETH"
-              onChange={handlePriceChange}
-              value={price}
-            />
-          </div>
-        )}
-        {!isOwner && isOnMarketplace && (
-          <div className="form-buy">
-            <button className="button button-green" onClick={buy}>
-              Buy {token.price} ETH
-            </button>
-          </div>
-        )}
-        {isOwner && isOnMarketplace && (
-          <div className="form-unlist-marketplace">
-            <button className="button button-red" onClick={unlist}>
-              Remove from marketplace
-            </button>
-          </div>
-        )}
+        <div className="actions-container">
+          {isOwner && !isOnMarketplace && (
+            <div className="action-list-marketplace">
+              <button
+                className="button button-primary"
+                onClick={handleClickListMarketplace}
+              >
+                List on Marketplace
+              </button>
+              <input
+                type="text"
+                placeholder="Price in ETH"
+                onChange={handlePriceChange}
+                value={price}
+              />
+            </div>
+          )}
+          {!isOwner && isOnMarketplace && (
+            <div className="action-buy">
+              <button className="button button-primary" onClick={buy}>
+                Buy {token.price} ETH
+              </button>
+            </div>
+          )}
+          {isOwner && isOnMarketplace && (
+            <div className="action-unlist-marketplace">
+              <button className="button button-secondary" onClick={unlist}>
+                Remove from marketplace
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -22,18 +22,22 @@ function Header(props: HeaderProps) {
   };
 
   return (
-    <div>
-      <div>
-        <h1 className="title">MaxRabbit</h1>
+    <div className="header">
+      <div className="header-banner">
+        <div>
+          <h1 className="header-banner-title">
+            Max<span>Rabbit</span>
+          </h1>
+        </div>
+        <button
+          className="button button-secondary"
+          id="button-metamask"
+          onClick={loginMetamask}
+        >
+          Connect your wallet
+        </button>
       </div>
-      <div className="subtitle">NFTs of the cuttest rabbit on earth.</div>
-      <button
-        className="button button-green"
-        id="button-metamask"
-        onClick={loginMetamask}
-      >
-        Login with Metamask
-      </button>
+      <div className="header-subtitle">NFTs of the cuttest rabbit on earth</div>
     </div>
   );
 }

@@ -21,10 +21,13 @@ function MintForm(props: MintFormProps) {
 
   return (
     <div className="mint-form-container">
-      <div>Mint a new NFT</div>
+      <div className="mint-form-title">Mint a new MaxRabbit token:</div>
       <form className="mint-form" onSubmit={handleMintSubmit}>
-        <label htmlFor="uri">URI</label>
-        <input type="text" name="uri" placeholder="enter metadata uri..." />
+        <input
+          type="text"
+          name="uri"
+          placeholder="IPFS metadata json file URI"
+        />
       </form>
     </div>
   );

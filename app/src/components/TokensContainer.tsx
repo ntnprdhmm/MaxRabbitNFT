@@ -5,7 +5,7 @@ import { Token, Metadata } from "./tokens";
 
 import { ethers } from "ethers";
 
-// local copy of typechain-types (from /hardhat) because it's not possible to import from hardhat package
+// local copy of typechain-types (from /hardhat)
 import {
   Marketplace__factory,
   MaxRabbit__factory,

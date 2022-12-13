@@ -1,14 +1,12 @@
 .mint-form-container {
-  color: var(--white-color);
-  padding-top: 32px;
+  padding: 16px;
+  border-bottom: 2px solid var(--light-dark);
 }
 
 .mint-form {
   padding-top: 12px;
 }
-.mint-form label {
-  padding-right: 6px;
-}
+
 .mint-form input {
   width: 370px;
 }

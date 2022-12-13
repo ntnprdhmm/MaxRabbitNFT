@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Header from "./Header";
 import TokensContainer from "./TokensContainer";
 
-import "./App.css";
-
 function App() {
   const [address, setAddress] = useState<string>();
 

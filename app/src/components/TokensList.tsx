@@ -3,6 +3,8 @@ import TokensListItem from "./TokensListItem";
 import MintForm from "./MintForm";
 import { Token } from "./tokens";
 
+import "./TokensList.css";
+
 type TokensListProps = {
   tokens: Token[];
   mint: (uri: string) => void;

@@ -1,15 +1,34 @@
-.title {
-  color: var(--green-2);
-  font-size: 48px;
+.header {
+  display: block;
 }
 
-.subtitle {
-  color: var(--white-color);
+.header-banner {
+  background-color: white;
+  padding: 16px;
+}
+
+.header-banner-title {
+  color: var(--light-dark);
+  font-size: 42px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.header-banner-title span {
+  color: var(--primary);
+}
+
+.header-subtitle {
+  color: white;
   font-size: 24px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  padding: 24px 16px;
+  border-top: 2px solid var(--light-dark);
+  border-bottom: 2px solid var(--light-dark);
 }
 
 #button-metamask {
   position: absolute;
-  top: 32px;
   right: 16px;
+  top: 20px;
 }

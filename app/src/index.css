@@ -1,20 +1,51 @@
-@font-face {
-  font-family: "Minecraft";
-  src: URL("../public/Minecraft.ttf") format("truetype");
+body {
+  margin: 0px;
+
+  font-family: "Verdana", sans-serif;
+
+  --light-dark: #010101;
+  --light-grey: #f8f8f8;
+  --dark-grey: #dfdfdf;
+  --primary: #0bda51;
+  --secondary: #ff5733;
+
+  background-color: var(--light-grey);
 }
 
-body {
-  margin: 16px;
-  font-family: "Minecraft", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.button {
+  text-decoration: none;
+  border: none;
+  font-family: sans-serif;
+  font-size: 18px;
+  padding: 12px 32px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  color: white;
+}
 
-  --black-color: #000;
-  --white-color: #fff;
-  --green-1: #91da73;
-  --green-2: #5ca43c;
-  --green-3: #4d763d;
-  --green-4: #253c1b;
+.button-primary {
+  background-color: var(--primary);
+  color: var(light-dark);
+}
 
-  background-color: var(--black-color);
+.button-secondary {
+  background-color: var(--secondary);
+}
+
+.button-secondary:hover {
+  box-shadow: rgb(0 0 0 / 16%) 0px 4px 15px;
+}
+
+.action-list-marketplace {
+  display: block;
+  position: relative;
+}
+
+.action-list-marketplace input {
+  line-height: 37px;
+  position: absolute;
+  top: 1px;
+  margin-left: 4px;
 }

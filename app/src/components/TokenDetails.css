@@ -1,55 +1,80 @@
 .token-details-container {
   padding-top: 32px;
   display: flex;
-}
-
-.column {
-  flex: 50%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  flex-flow: wrap;
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 16px;
 }
 
 .token-details-image {
   width: 400px;
+  border-radius: 12px;
 }
 
-.token-details-name {
-  color: var(--green-2);
-  font-size: 40px;
+.column-details {
+  color: var(--light-dark);
+}
+
+.token-id {
+  font-size: 32px;
   font-weight: 600;
+  border: 1px solid var(--light-grey);
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 15px;
+  display: inline-block;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+.token-description-container {
+  border: 1px solid var(--dark-grey);
+  border-radius: 12px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 15px;
+}
+
+.token-description-title,
+.token-description-attributes-title,
+.token-description-owner-title {
+  padding: 8px;
+  border-bottom: 1px solid var(--dark-grey);
+  font-weight: 700;
+}
+
+.token-description {
+  padding: 8px;
+  max-width: 500px;
+}
+
+.token-description-attributes-title, .token-description-owner-title {
+  border-top: 1px solid var(--dark-grey);
+}
+
+.token-description-owner-id {
+  padding: 8px;
+} 
+
+.token-description-attributes {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.token-description-attribute span {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+#backLink {
+  display: block;
   margin-bottom: 16px;
 }
 
-.token-details-description {
-  color: var(--white-color);
-  font-size: 24px;
-  margin-bottom: 16px;
-}
-
-.token-details-owner {
-  color: var(--white-color);
-  font-size: 16px;
-  margin-bottom: 16px;
-}
-
-.token-details-attributes {
-  padding-bottom: 12px;
-}
-
-.token-details-attribute {
-  color: var(--white-color);
-  margin-bottom: 12px;
-}
-
-.token-details-attribute span {
-  color: var(--green-2);
-}
-
-.form-list-marketplace,
-.form-buy,
-.form-unlist-marketplace {
-  margin-top: 16px;
-}
-
-.form-list-marketplace input {
-  line-height: 32px;
-  padding: 0px;
+.actions-container {
+  padding-top: 16px;
 }

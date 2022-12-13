@@ -1,28 +1,53 @@
 .nft-container {
   width: 300px;
-  text-align: center;
   margin-top: 32px;
   border: 1px solid var(--white-color);
-  padding: 24px;
-  display: inline-block;
-  margin-right: 24px;
+  background-color: var(--white-color);
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 15px;
+}
+
+.nft-container:hover {
+  cursor: pointer;
+}
+
+.nft-image-container {
+  overflow: hidden;
 }
 
 .nft-image {
   width: 300px;
+  transition: all 0.3s ease-in-out;
 }
 
-.nft-title {
-  padding-top: 12px;
-  color: var(--green-2);
+.nft-image:hover {
+  transform: scale(1.2);
 }
 
-.nft-on-sale {
-  margin-top: 16px;
-  color: var(--white-color);
+.nft-infos-container {
+  padding: 12px 12px;
+}
+
+.nft-title,
+.nft-id {
+  color: var(--light-dark);
+}
+
+.nft-id {
+  border: 1px solid var(--light-grey);
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 15px;
+  display: inline-block;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
 .nft-not-on-sale {
-  margin-top: 16px;
-  color: red;
+  color: var(--secondary);
+}
+
+.nft-sale-price {
+  color: var(--primary);
 }

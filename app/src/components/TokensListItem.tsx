@@ -17,14 +17,19 @@ function TokensListItem(props: TokensListItemProps) {
 
   return (
     <div className="nft-container" onClick={handleClick}>
-      <img className="nft-image" src={token.image} alt={token.name} />
-      <div className="nft-title">{token.name}</div>
-      {token.price !== "0.0" && (
-        <div className="nft-on-sale">ON SALE {token.price} ETH</div>
-      )}
-      {token.price === "0.0" && (
-        <div className="nft-not-on-sale">NOT ON SALE</div>
-      )}
+      <div className="nft-image-container">
+        <img className="nft-image" src={token.image} alt={token.name} />
+      </div>
+      <div className="nft-infos-container">
+        <div className="nft-id">MaxRabbit #{token.id}</div>
+        <div className="nft-title">{token.name}</div>
+        {token.price !== "0.0" && (
+          <div className="nft-sale-price">{token.price} ETH</div>
+        )}
+        {token.price === "0.0" && (
+          <div className="nft-not-on-sale">not on sale</div>
+        )}
+      </div>
     </div>
   );
 }
