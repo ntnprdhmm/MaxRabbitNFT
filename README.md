@@ -1,16 +1,19 @@
 # MaxRabbitNFT
 
-ERC 721 tokens of my rabbit Max, just for fun
+A Marketplace to trade ERC 721 tokens of my rabbit Max, just for fun.
 
+In this repository, there are:
 - a WebApp, in React
-- Smart contracts on Ethereum Blockchain: ERC 721 token, and marketplace to trade the tokens
+- 2 smart contracts on Ethereum Blockchain: the ERC 721 token contract, and a marketplace contract to trade the tokens
 
-The owner of the contracts can mint new tokens.
-Tokens are displayed on the web app.
-The owner of a token can list the token on the marketplace and specify a price.
-The owner can unlist the listed token from the marketplace.
-The marketplace takes fees when someone list a token.
-Anyone can buy a listed token.
+How does it work:
+- The owner (address which deployed the contracts) can mint new tokens on the web app
+- All the tokens are displayed on the web app
+- By detault, the owner is the owner of all the tokens
+- The owner of a token can set a price and list it on the marketplace
+- There are fees when listing a token on the marketplace
+- The owner of a token can remove it from the marketplace if the token is listed
+- Anyone can buy a token listed on the marketplace (except the owner of the token of course)
 
 ![Alt text](./screenshot_1.png?raw=true "Home page")
 ![Alt text](./screenshot_2.png?raw=true "NFT Details page")
